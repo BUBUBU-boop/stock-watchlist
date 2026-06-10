@@ -35,9 +35,7 @@ def get_company_info(ticker):
         return result
 
     except Exception as e:
-        print(f"[ERROR] get_company_info failed")
-        print(f"[ERROR] exception={repr(e)}")
-        return None
+        raise e
 
 
 def get_stock_price(ticker):
@@ -79,6 +77,4 @@ def get_stock_price(ticker):
         return result
 
     except Exception as e:
-        print(f"[ERROR] get_stock_price failed")
-        print(f"[ERROR] exception={repr(e)}")
-        return None
+        raise e
