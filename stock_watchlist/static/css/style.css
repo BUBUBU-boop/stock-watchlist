@@ -1,0 +1,121 @@
+/* ========================================
+   全体設定
+======================================== */
+
+body {
+    background-color: #dbeafe;
+    font-family: Arial, sans-serif;
+    color: #333333;
+}
+
+/* ========================================
+   ナビゲーションバー
+======================================== */
+
+.navbar {
+    background-color: #2563eb !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   見出し
+======================================== */
+
+h1 {
+    color: #1e40af;
+    font-weight: bold;
+}
+
+/* ========================================
+   カード
+======================================== */
+
+.card {
+    border: none;
+    border-radius: 12px;
+
+    /* 少し浮かせる */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+/* ========================================
+   ボタン
+======================================== */
+
+.btn-primary {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.btn-primary:hover {
+    background-color: #1e40af;
+    border-color: #1e40af;
+}
+
+/* ========================================
+   テーブル
+======================================== */
+
+.table {
+    margin-bottom: 0;
+    background-color: white;
+}
+
+.table thead {
+    background-color: #dbeafe;
+}
+
+.table thead th {
+    color: #1e40af;
+    font-weight: bold;
+    border-bottom: 2px solid #2563eb;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* ========================================
+   アラート
+======================================== */
+
+.alert {
+    border-radius: 10px;
+}
+
+/* ========================================
+   フッター
+======================================== */
+
+footer {
+    color: #666666;
+}
+
+/* ========================================
+   レスポンシブ
+======================================== */
+
+@media (max-width: 768px) {
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+}

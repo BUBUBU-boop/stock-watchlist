@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}株価ウォッチリスト{% endblock %}
+
+{% block content %}
+
+
+<h1 class="mb-4 text-center">
+    株価ウォッチリスト
+</h1>
+
+<!-- 登録カード -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header">
+        銘柄登録
+    </div>
+    <div class="card-body">
+
+        <form method="POST" action="{{ url_for('add') }}">
+            <div class="row g-2">
+
+                <div class="col-md-10">
+                    <input
+                        type="text"
+                        name="ticker"
+                        class="form-control"
+                        placeholder="例: AAPL / NVDA / 7203.T"
+                        required
+                    >
+                </div>
+
+                <div class="col-md-2">
+                    <button
+                        type="submit"
+                        class="btn btn-primary w-100"
+                    >
+                        登録
+                    </button>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!-- メッセージ表示 -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<!-- ウォッチリスト -->
+<div class="card shadow-sm">
+    <div class="card-header">
+        ウォッチリスト
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-striped align-middle">
+
+                <thead>
+                    <tr>
+                        <th>銘柄コード</th>
+                        <th>銘柄名</th>
+                        <th>現在価格</th>
+                        <th>前日終値</th>
+                        <th>前日比</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                {% for stock in watchlist %}
+                    <tr>
+
+                        <td>{{ stock.ticker }}</td>
+
+                        <td>{{ stock.company_name }}</td>
+
+                        <td>{{ stock.current_price }}</td>
+
+                        <td>{{ stock.previous_close }}</td>
+
+                        <td>
+                            {% if stock.change_percent is not none %}
+
+                                {% if stock.change_percent >= 0 %}
+                                    <span class="text-success fw-bold">
+                                        +{{ stock.change_percent }}%
+                                    </span>
+                                {% else %}
+                                    <span class="text-danger fw-bold">
+                                        {{ stock.change_percent }}%
+                                    </span>
+                                {% endif %}
+
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <form
+                                method="POST"
+                                action="{{ url_for('delete', id=stock.id) }}"
+                            >
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger btn-sm"
+                                >
+                                    削除
+                                </button>
+                            </form>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+                {% if watchlist|length == 0 %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            登録された銘柄はありません
+                        </td>
+                    </tr>
+                {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
